@@ -1,4 +1,4 @@
-# Tài liệu hướng dẫn sử dụng hệ thống quản lý phòng thực hành
+# Tài liệu hướng dẫn sử dụng hệ thống quản lý tiêm phòng - Petcare
 
 ## 1. Giới thiệu
 
@@ -6,58 +6,80 @@ Hệ thống quản lý tiêm phòng - PetCare là ứng dụng web hỗ trợ q
 Hệ thống giúp tối ưu quy trình làm việc tại cơ sở thú y và mang lại trải nghiệm tiện lợi, chính xác cho khách hàng.
 ## 2. Chức năng theo vai trò
 
-### 2.1. Sinh viên
+### 2.1. Khách hàng
 
-#### Tìm kiếm phòng
+#### Đăng ký – Đăng nhập
 
-- Truy cập đường dẫn: `/student/search_rooms`
+- Truy cập đường dẫn: 
+  -  Đăng nhập - `/customer/index.php?controller=XacThucController&action=hienThiDangNhap`
+  - Đăng ký - `/customer/index.php?controller=XacThucController&action=hienThiDangKy`
 - Chức năng:
-  - Tìm kiếm phòng theo tên, loại phòng, số máy, vị trí
-  - Chỉ hiển thị phòng có trạng thái "trống"
-  - Xem danh sách phòng phù hợp với tiêu chí tìm kiếm
+  - Tạo tài khoản
+  - Đăng nhập, đăng xuất
+  - Cập nhật thông tin cá nhân
 
-#### Xem chi tiết phòng
+#### Quản lý thú cưng
 
-- Truy cập đường dẫn: `/student/room_detail/{id}`
+- Truy cập đường dẫn: `/customer/index.php?controller=KhachHangController&action=hienThiHoSo`
 - Chức năng:
-  - Xem thông tin chi tiết về phòng: tên, loại, số máy, vị trí, trạng thái
-  - Xem danh sách thiết bị trong phòng
-  - Xem lịch sử dụng phòng và các lớp học sắp diễn ra
+  - Thêm thú cưng: tên, loại, giống, cân nặng, ngày sinh, giới tính, tình trạng sức khỏe, ảnh
+  - Xem danh sách thú cưng
+  - Chỉnh sửa thông tin thú cưng
 
-#### Đặt phòng
+#### Xem danh sách dịch vụ tiêm phòng
 
-- Truy cập đường dẫn: `/student/book_room`
+- Truy cập đường dẫn: `/customer/index.php?controller=DichVuController&action=hienThiDanhSachDichVu`
 - Chức năng:
-  - Đề xuất đặt phòng theo khung giờ
-  - Điền thông tin đặt phòng: mục đích, thời gian bắt đầu, kết thúc
-  - Hệ thống sẽ kiểm tra xung đột và lưu yêu cầu với trạng thái "chờ duyệt"
+  - Xem thông tin vaccine: mô tả, số lần tiêm, giá, hình ảnh
+  - Chọn loại vaccine để đặt lịch
 
-### 2.2. Giảng viên
+#### Đặt lịch tiêm phòng
 
-#### Tìm kiếm phòng
-
-- Truy cập đường dẫn: `/teacher/search_rooms`
+- Truy cập đường dẫn: `/customer/index.php?controller=LichTiemController&action=hienThiDatLich`
 - Chức năng:
-  - Tìm kiếm phòng theo tên, loại phòng, số máy, vị trí
-  - Xem danh sách phòng phù hợp với tiêu chí tìm kiếm
-  - Truy cập nhanh đến chức năng đề xuất phòng trống theo thời gian
+  - Chọn thú cưng cần tiêm
+  - Chọn loại vaccine
+  - Chọn ngày – giờ hẹn tiêm
+  - Nhập ghi chú (nếu có)
+  - Gửi yêu cầu đặt lịch (ở trạng thái chờ duyệt)
 
-#### Xem chi tiết phòng
+#### Xem lịch tiêm đã đặt
 
-- Truy cập đường dẫn: `/teacher/room_detail/{id}`
+- Truy cập đường dẫn: `/customer/index.php?controller=LichTiemController&action=hienThiLichTiem`
 - Chức năng:
-  - Xem thông tin chi tiết về phòng: tên, loại, số máy, vị trí, trạng thái
-  - Xem danh sách thiết bị trong phòng và tình trạng
-  - Xem và lựa chọn khung giờ trống để đặt phòng
+  - Xem danh sách lịch tiêm sắp tới
+  - Theo dõi trạng thái: chờ duyệt, đã duyệt, hoàn thành, hủy
 
-#### Đề xuất phòng trống theo thời gian
+#### Xem lịch sử tiêm phòng
 
-- Truy cập đường dẫn: `/teacher/suggest_rooms`
+- Truy cập đường dẫn: `/customer/index.php?controller=LichTiemController&action=hienThiLichSuTiem`
 - Chức năng:
-  - Chọn khung thời gian cần tìm phòng trống
-  - Chọn loại phòng và số máy tối thiểu
-  - Hệ thống đề xuất danh sách phòng trống phù hợp với yêu cầu
-  - Truy cập nhanh đến chức năng đặt phòng
+  - Xem các mũi tiêm đã thực hiện
+  - Xem liều lượng, bác sĩ thực hiện, ghi chú
+
+### 2.2. Quản trị viên
+
+#### Quản lý loại vaccine
+
+- Truy cập đường dẫn: `/petcare/admin/index.php?controller=AdminController&action=quanLyVacXin`
+- Chức năng:
+  - Thêm loại vaccine mới
+  - Chỉnh sửa thông tin vaccine
+  - Xóa vaccine
+
+#### Quản lý lịch hẹn
+
+- Truy cập đường dẫn: `/petcare/admin/index.php?controller=AdminController&action=quanLyDatLich`
+- Chức năng:
+  - Xem toàn bộ lịch hẹn
+  - Cập nhật trạng thái: chờ duyệt, đã duyệt, đang tiêm, hoàn thành, hủy
+
+#### Xem báo cáo – thống kê
+
+- Truy cập đường dẫn: `/petcare/admin/index.php`
+- Chức năng:
+  - Thống kê số lịch hẹn
+  - Thống kê số loại vaccine 
 
 #### Đặt phòng
 
@@ -67,76 +89,58 @@ Hệ thống giúp tối ưu quy trình làm việc tại cơ sở thú y và ma
   - Điền thông tin đặt phòng: lớp, thời gian bắt đầu, kết thúc
   - Hệ thống sẽ kiểm tra xung đột và xác nhận đặt phòng
 
-### 2.3. Quản trị viên
+## 3. Hướng dẫn sử dụng
 
-#### Tìm kiếm và quản lý phòng
+### 3.1. Đăng ký và đăng nhập
 
-- Truy cập đường dẫn: `/admin/search_rooms`
-- Chức năng:
-  - Tìm kiếm phòng theo nhiều tiêu chí: tên, loại, số máy, vị trí, trạng thái
-  - Thêm, sửa, xóa phòng
-  - Quản lý thông tin chi tiết của phòng
-  - Truy cập nhanh đến chức năng quản lý loại phòng
+1. Truy cập trang đăng nhập/đăng ký theo đường dẫn tương ứng
+2. Nhập thông tin tài khoản
+3. Xác nhận và truy cập hệ thống theo vai trò
 
-## 3. Hướng dẫn tìm kiếm phòng
+### 3.2. Hướng dẫn quản lý thú cưng (Khách hàng)
 
-### 3.1. Tìm kiếm cơ bản
+1. Truy cập mục: Hồ sơ cá nhân
+2. Chọn Thêm thú cưng
+3. Nhập đầy đủ thông tin
+4. Lưu lại để hệ thống ghi nhận thú cưng mới
 
-1. Truy cập vào phần tìm kiếm phòng theo vai trò của bạn:
-   - Sinh viên: `/student/search_rooms`
-   - Giảng viên: `/teacher/search_rooms`
-   - Quản trị viên: `/admin/search_rooms`
-2. Điền các tiêu chí tìm kiếm:
-   - Tên phòng: nhập từ khóa tìm kiếm
-   - Số máy tối thiểu: nhập số người
-   - Vị trí: nhập từ khóa vị trí
-3. Nhấn nút "Tìm kiếm" để hiển thị kết quả
-4. Kết quả sẽ hiển thị dưới dạng bảng với các thông tin cơ bản và nút tác vụ
+### 3.3. Hướng dẫn đặt lịch tiêm (Khách hàng)
 
-### 3.2. Tìm kiếm phòng trống theo thời gian (Dành cho giảng viên)
+1. Truy cập mục Danh sách dịch vụ
+2. Chọn loại vaccine cần tiêm
+3. Chọn thú cưng – ngày – giờ
+4. Nhấn Đặt lịch
+5. Kiểm tra lại lịch tại mục Lịch tiêm
 
-1. Truy cập: `/teacher/suggest_rooms`
-2. Chọn thời gian bắt đầu và kết thúc cần tìm phòng trống
-3. Chọn thêm loại phòng và số máy tối thiểu (nếu cần)
-4. Nhấn "Tìm phòng trống" để xem kết quả
-5. Kết quả hiển thị các phòng khả dụng trong khung giờ đã chọn
+### 3.4. Hướng dẫn xem lịch sử tiêm
 
-## 4. Hướng dẫn xem chi tiết phòng
+1. Truy cập mục Lịch sử tiêm
+2. Hệ thống hiển thị:
+- Vaccine đã tiêm
+- Ngày tiêm
+- Bác sĩ thực hiện
+- Liều lượng
+- Ghi chú
 
-1. Từ trang kết quả tìm kiếm, nhấn vào nút "Chi tiết" của phòng cần xem
-2. Thông tin chi tiết phòng sẽ hiển thị:
-   - Thông tin cơ bản: tên, loại, số máy, vị trí, trạng thái
-   - Danh sách thiết bị trong phòng (nếu có)
-   - Lịch sử dụng phòng hoặc lịch sắp tới
-   - Đối với giảng viên: hiển thị thêm khung giờ trống để chọn đặt phòng
+### 3.5. Hướng dẫn quản lý vaccine (Quản trị viên)
 
-## 5. Hướng dẫn đặt phòng
+1. Truy cập mục Quản lý Vaccine
+2. Chức năng:
+- Thêm vaccine
+- Sửa vaccine
+- Xóa vaccine
+3. Hệ thống tự động cập nhật dữ liệu sau khi lưu
 
-### 5.1. Đặt phòng cho sinh viên
+### 3.6. Hướng dẫn quản lý lịch hẹn (Quản trị viên)
 
-1. Từ trang chi tiết phòng, nhấn vào nút "Đề xuất đặt phòng này"
-2. Điền thông tin đặt phòng:
-   - Chọn thời gian bắt đầu và kết thúc
-   - Nhập mục đích sử dụng
-3. Nhấn "Đặt phòng" để gửi yêu cầu
-4. Yêu cầu sẽ ở trạng thái "chờ duyệt" và cần được quản trị viên phê duyệt
+1. Mở trang Quản lý lịch hẹn
+2. Tại mỗi lịch hẹn: Cập nhật trạng thái thực hiện
+3. Hệ thống ghi nhận và hiển thị ngay cho phía khách hàng
 
-### 5.2. Đặt phòng cho giảng viên
+## 4. Lưu ý quan trọng
 
-1. Có nhiều cách để đặt phòng:
-   - Từ trang chi tiết phòng: nhấn "Đặt phòng này"
-   - Từ trang đề xuất phòng trống: chọn phòng phù hợp và nhấn "Đặt phòng"
-   - Từ trang tìm kiếm: nhấn "Đặt phòng" với phòng mong muốn
-2. Điền thông tin đặt phòng:
-   - Chọn thời gian bắt đầu và kết thúc
-   - Nhập mã lớp học
-3. Hệ thống sẽ kiểm tra xung đột lịch và xác nhận đặt phòng
-
-## 7. Lưu ý quan trọng
-
-- Sinh viên chỉ có thể đề xuất đặt phòng, cần được quản trị viên phê duyệt
-- Giảng viên có thể trực tiếp đặt phòng nếu không xung đột lịch
-- Không thể đặt phòng trong khoảng thời gian đã có người đặt trước
-- Đảm bảo kiểm tra thông tin phòng và thiết bị trước khi đặt
-- Báo cáo ngay khi phát hiện thiết bị hỏng hóc
-- Tuân thủ quy định sử dụng phòng thực hành
+- Khách hàng phải có tài khoản mới đặt lịch được
+- Lịch tiêm bị trùng giờ sẽ không được duyệt
+- Khách hàng cần theo dõi trạng thái để biết lịch tiêm có được xác nhận hay không
+- Các thông tin thú cưng và khách hàng phải được cập nhật đầy đủ để tránh lỗi đặt lịch
+- Quản trị viên cần kiểm tra kỹ thông tin vaccine trước khi cập nhật
