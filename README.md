@@ -1,4 +1,4 @@
-# Yêu Cầu Hệ Thống PDU PMS (Hệ Thống Quản Lý Phòng Đào Tạo)
+[# Yêu Cầu Hệ Thống PDU PMS (Hệ Thống Quản Lý Phòng Đào Tạo)
 
 ## Tổng Quan
 
@@ -413,3 +413,4 @@ PDU PMS là hệ thống quản lý phòng học và tài nguyên toàn diện �
 ## Hướng Dẫn Sử Dụng
 
 Tài liệu hướng dẫn chi tiết cách sử dụng hệ thống có thể được tìm thấy trong thư mục `/docs`.
+](https://github.com/hanh54/petcare.git)
