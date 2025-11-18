@@ -116,19 +116,19 @@ Hệ thống giúp tối ưu quy trình làm việc tại cơ sở thú y và ma
 
 1. Truy cập mục Lịch sử tiêm
 2. Hệ thống hiển thị:
-- Vaccine đã tiêm
-- Ngày tiêm
-- Bác sĩ thực hiện
-- Liều lượng
-- Ghi chú
+    - Vaccine đã tiêm
+    - Ngày tiêm
+    - Bác sĩ thực hiện
+    - Liều lượng
+    - Ghi chú
 
 ### 3.5. Hướng dẫn quản lý vaccine (Quản trị viên)
 
 1. Truy cập mục Quản lý Vaccine
 2. Chức năng:
-- Thêm vaccine
-- Sửa vaccine
-- Xóa vaccine
+    - Thêm vaccine
+    - Sửa vaccine
+    - Xóa vaccine
 3. Hệ thống tự động cập nhật dữ liệu sau khi lưu
 
 ### 3.6. Hướng dẫn quản lý lịch hẹn (Quản trị viên)
