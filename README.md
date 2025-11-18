@@ -370,12 +370,12 @@ GioHen
 - `/teacher/room_detail/{id}` - Xem chi tiết phòng
 - `/teacher/suggest_rooms` - Đề xuất phòng trống theo thời gian
 - `/petcare/customer/index.php` - Trang chủ khách hàng
-`/customer/index.php?controller=XacThucController&action=hienThiDangNhap` - Đăng nhập
-`/customer/index.php?controller=XacThucController&action=hienThiDangKy` - Đăng ký
-`/customer/index.php?controller=DichVuController&action=hienThiDanhSachDichVu` - Dịch vụ tiêm phòng
-`/customer/index.php?controller=LichTiemController&action=hienThiLichTiem` - Lịch tiêm
-`/customer/index.php?controller=LichTiemController&action=hienThiLichTiem` - Lịch sử tiêm
-`/customer/index.php?controller=KhachHangController&action=hienThiHoSo` - Hồ sơ cá nhân 
+- `/customer/index.php?controller=XacThucController&action=hienThiDangNhap` - Đăng nhập
+- `/customer/index.php?controller=XacThucController&action=hienThiDangKy` - Đăng ký
+- `/customer/index.php?controller=DichVuController&action=hienThiDanhSachDichVu` - Dịch vụ tiêm phòng
+- `/customer/index.php?controller=LichTiemController&action=hienThiLichTiem` - Lịch tiêm
+- `/customer/index.php?controller=LichTiemController&action=hienThiLichTiem` - Lịch sử tiêm
+- `/customer/index.php?controller=KhachHangController&action=hienThiHoSo` - Hồ sơ cá nhân 
 
 
 ## Hướng Dẫn Sử Dụng
