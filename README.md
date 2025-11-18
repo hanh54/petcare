@@ -1,8 +1,8 @@
-[# Yêu Cầu Hệ Thống PDU PMS (Hệ Thống Quản Lý Phòng Đào Tạo)
+# Yêu Cầu Hệ Thống Quản Lý Thú Y
 
 ## Tổng Quan
 
-PDU PMS là hệ thống quản lý phòng học và tài nguyên toàn diện được thiết kế cho các tổ chức giáo dục. Hệ thống cho phép quản trị viên, giáo viên và sinh viên quản lý và đặt phòng dựa trên thời khóa biểu và tình trạng sẵn có.
+Hệ thống quản lý tiêm phòng - PetCare là đơn vị chuyên cung cấp các dịch vụ tiêm phòng vacxin cho thú cưng. Đây một hệ thống quản lý dịch vụ tiêm phòng chăm sóc thú y trực tuyến giúp việc quản lý lịch hẹn và quản lý dịch vụ vacxin trở nên thuận tiện, chính xác và hiệu quả hơn cho chủ cơ sở đồng thời hỗ trợ việc quản lý hồ sơ cá nhân, đặt lịch, theo dõi lịch tiêm và lịch sử tiêm thú cưng cho khách hàng. Các đối tượng chính tương tác với hệ thống bao gồm khách hàng (chủ thú cưng), và chủ cơ sở.
 
 ## Yêu Cầu Hệ Thống
 
@@ -17,37 +17,28 @@ PDU PMS là hệ thống quản lý phòng học và tài nguyên toàn diện �
 ### Cấu Hình Cơ Sở Dữ Liệu
 
 - Host: localhost
-- Tên Database: pdu_pms
+- Tên Database: petcare
 - Tên người dùng: root
 - Cấu hình mật khẩu mặc định (có thể được sửa đổi trong Config/Database.php)
 
 ## Vai Trò Người Dùng và Quyền Truy Cập
 
+Hệ thống quản lý chăm sóc thú cưng PetCare được xây dựng nhằm phục vụ các nhóm người dùng có vai trò khác nhau trong hoạt động vận hành và sử dụng dịch vụ của cơ sở. Mỗi vai trò sẽ có các quyền truy cập và chức năng riêng, đảm bảo tính bảo mật, hiệu quả và phân quyền rõ ràng trong hệ thống.
+
 ### Quản Trị Viên
 
-- Quản lý người dùng (thêm, sửa, xóa)
-- Quản lý phòng học (thêm, sửa, xóa)
-- Quản lý loại phòng (thêm, sửa, xóa)
-- Quản lý thời khóa biểu (thêm, sửa, xóa)
-- Quản lý đặt phòng (thêm, sửa, xóa)
-- Tự động sắp xếp phòng học dựa trên thời khóa biểu
-- Xem bảng điều khiển với thống kê hệ thống
+- Quản lý loại Vacxin (thêm, sửa, xóa)
+- Quản lý loại đặt lịch (cập nhật các trạng thái)
+- Quản lý báo cáo và thống kê 
 
-### Giáo Viên
+### Khách hàng
 
-- Xem và tìm kiếm phòng học có sẵn
-- Xem chi tiết phòng học và thiết bị
-- Đề xuất phòng trống theo thời gian
-- Đặt phòng cho lớp/buổi học
-- Quản lý đặt phòng cá nhân
-- Xem thời khóa biểu
+- Đăng ký, đăng nhập, đăng xuất và cập nhật thông tin cá nhân
+- Thêm, xem thông tin thú cưng của mình
+- Lựa chọn dịch vacxin tiêm mong muốn kèm theo ngày, giờ, thú cưng được tiêm và ghi chú(nếu có).
+- Xem lại các loại vacxin đã tiêm
+- Xem lịch tiêm sắp tới,  đã đăng ký mà chưa tiêm đồng thời theo dõi trạng thái đơn.
 
-### Sinh Viên
-
-- Xem và tìm kiếm phòng học có sẵn
-- Xem chi tiết phòng học và thiết bị
-- Đặt phòng cho buổi học nhóm (cần được duyệt)
-- Xem thời khóa biểu
 
 ## Use Cases (Trường Hợp Sử Dụng)
 
@@ -55,7 +46,7 @@ PDU PMS là hệ thống quản lý phòng học và tài nguyên toàn diện �
 
 1. **Đăng Nhập**
 
-   - **Tác nhân:** Quản trị viên, Giáo viên, Sinh viên
+   - **Tác nhân:** Quản trị viên, Khách hàng
    - **Mô tả:** Người dùng đăng nhập vào hệ thống bằng tên đăng nhập và mật khẩu
    - **Luồng chính:**
      1. Người dùng truy cập trang đăng nhập
@@ -65,352 +56,328 @@ PDU PMS là hệ thống quản lý phòng học và tài nguyên toàn diện �
 
 2. **Đăng Ký**
 
-   - **Tác nhân:** Người dùng mới
+   - **Tác nhân:** Khách hàng mới
    - **Mô tả:** Người dùng tạo tài khoản mới trong hệ thống
    - **Luồng chính:**
      1. Người dùng truy cập trang đăng ký
-     2. Điền thông tin cá nhân, tên đăng nhập, mật khẩu, vai trò
+     2. Điền thông tin cá nhân như tên đăng nhập, mật khẩu và email
      3. Hệ thống xác thực và lưu thông tin
      4. Chuyển hướng đến trang đăng nhập
 
 3. **Đăng Xuất**
+
    - **Tác nhân:** Người dùng đã đăng nhập
    - **Mô tả:** Người dùng đăng xuất khỏi hệ thống
    - **Luồng chính:**
      1. Người dùng nhấn nút đăng xuất
-     2. Hệ thống xóa phiên đăng nhập
+     2. Hệ thống xóa phiên đăng nhập hiện tại
      3. Chuyển hướng đến trang đăng nhập
 
 ### Use Cases Quản Trị Viên
 
-1. **Quản Lý Người Dùng**
+1. **Quản Lý Loại Vắc-xin**
 
    - **Tác nhân:** Quản trị viên
-   - **Mô tả:** Quản lý thông tin người dùng trong hệ thống
+   - **Mô tả:** Quản lý danh sách các loại vắc-xin
    - **Luồng chính:**
      1. Quản trị viên truy cập trang quản lý người dùng
-     2. Xem danh sách người dùng hiện có
-     3. Thêm người dùng mới
-     4. Chỉnh sửa thông tin người dùng
-     5. Xóa người dùng khỏi hệ thống
+     2. Xem danh sách vắc-xin hiện có
+     3. Thêm loại vắc-xin mới
+     4. Cập nhật thông tin vắc-xin
+     5. Xóa vắc-xin không còn cung cấp
 
-2. **Quản Lý Phòng Học**
+2. **Quản Lý Lịch Hẹn**
 
    - **Tác nhân:** Quản trị viên
-   - **Mô tả:** Quản lý thông tin phòng học
+   - **Mô tả:** Quản lý thông tin lịch hẹn
    - **Luồng chính:**
-     1. Quản trị viên truy cập trang quản lý phòng học
-     2. Xem danh sách phòng học hiện có
-     3. Thêm phòng học mới
-     4. Chỉnh sửa thông tin phòng học
-     5. Xóa phòng học khỏi hệ thống
+     1. Quản trị viên truy cập trang quản lý lịch hẹn
+     2. Xem danh sách lịch hẹn hiện có
+     3. Cập nhật trạng thái của lịch hẹn như: chờ xác nhận, đã xác nhận, đang thực hiện, hoàn thành, hủy
+     4. Hệ thống lưu kết quả xử lý, đồng thời hiển thị bên khách hàng
 
-3. **Quản Lý Loại Phòng**
-
-   - **Tác nhân:** Quản trị viên
-   - **Mô tả:** Quản lý các loại phòng học
-   - **Luồng chính:**
-     1. Quản trị viên truy cập trang quản lý loại phòng
-     2. Xem danh sách loại phòng hiện có
-     3. Thêm loại phòng mới
-     4. Chỉnh sửa thông tin loại phòng
-     5. Xóa loại phòng không đang sử dụng
-
-4. **Quản Lý Thời Khóa Biểu**
+3. **Xem Thống Kê Hệ Thống**
 
    - **Tác nhân:** Quản trị viên
-   - **Mô tả:** Tạo và quản lý thời khóa biểu
-   - **Luồng chính:**
-     1. Quản trị viên truy cập trang quản lý thời khóa biểu
-     2. Xem danh sách thời khóa biểu hiện có
-     3. Tạo thời khóa biểu mới
-     4. Chỉnh sửa thông tin thời khóa biểu
-     5. Xóa thời khóa biểu khỏi hệ thống
-
-5. **Tự Động Sắp Xếp Phòng Học**
-
-   - **Tác nhân:** Quản trị viên
-   - **Mô tả:** Hệ thống tự động phân bổ phòng học dựa trên thời khóa biểu
-   - **Luồng chính:**
-     1. Quản trị viên truy cập chức năng tự động sắp xếp
-     2. Chọn thời khóa biểu cần sắp xếp
-     3. Hệ thống tự động phân tích và gợi ý phòng học phù hợp
-     4. Quản trị viên xác nhận hoặc điều chỉnh gợi ý
-     5. Hệ thống cập nhật và lưu thông tin
-
-6. **Xem Thống Kê Hệ Thống**
-   - **Tác nhân:** Quản trị viên
-   - **Mô tả:** Xem các thống kê về việc sử dụng phòng học
+   - **Mô tả:** Xem các thống kê về lịch hẹn và loại vắc-xin
    - **Luồng chính:**
      1. Quản trị viên truy cập trang thống kê
-     2. Xem thông tin về tần suất sử dụng phòng học
-     3. Xem thống kê về đặt phòng theo thời gian
-     4. Xem báo cáo tổng hợp về hoạt động của hệ thống
+     2. Xem thông tin về lịch hẹn
+     3. Xem thống kê các loại vắc-xin
 
-### Use Cases Giáo Viên
+### Use Cases Khách Hàng
 
-1. **Tìm Kiếm Phòng Học**
+1. **Thêm thú cưng**
 
-   - **Tác nhân:** Giáo viên
-   - **Mô tả:** Giáo viên tìm kiếm phòng học theo tiêu chí
+   - **Tác nhân:** Khách hàng
+   - **Mô tả:** Khách hàng thêm thông tin thú cưng của mình vào hệ thống
    - **Luồng chính:**
-     1. Giáo viên truy cập trang tìm kiếm phòng
-     2. Nhập các tiêu chí tìm kiếm (tên, loại, số máy, v.v.)
-     3. Hệ thống hiển thị danh sách phòng học phù hợp
+     1. Khách hàng truy cập hồ sơ cá nhân
+     2. Nhập thông tin thú cưng (tên, loại, giống, ngày sinh, cân nặng, giới tính, tình trạng sức khỏe, lịch sử tiêm, hình ảnh)
+     3. Hệ thống lưu thông tin thú cưng vào cơ sở dữ liệu
 
-2. **Xem Chi Tiết Phòng Học**
+2. **Đặt Lịch Tiêm Phòng**
 
-   - **Tác nhân:** Giáo viên
-   - **Mô tả:** Giáo viên xem thông tin chi tiết về phòng học
+   - **Tác nhân:** Khách hàng
+   - **Mô tả:** Khách hàng đặt lịch sử dụng dịch vụ tiêm phòng cho thú cưng
    - **Luồng chính:**
-     1. Giáo viên chọn một phòng học từ danh sách
-     2. Hệ thống hiển thị thông tin chi tiết về phòng học
-     3. Xem danh sách thiết bị có trong phòng
-     4. Xem lịch sử dụng phòng
+     1. Sinh viên truy cập trang đặt lịch tiêm
+     2. Khách hàng chọn loại thuốc muốn tiêm cho thú cưng
+     3. Chọn thú cưng, ngày, giờ, ghi chú (nếu có)
+     4. Hệ thống xác nhận và gửi yêu cầu đặt lịch (cần được duyệt)
 
-3. **Đề Xuất Phòng Trống Theo Thời Gian**
+3. **Xem Lịch Sử Tiêm**
 
-   - **Tác nhân:** Giáo viên
-   - **Mô tả:** Hệ thống đề xuất phòng trống theo khung thời gian cụ thể
+   - **Tác nhân:** Khách hàng
+   - **Mô tả:** Khách hàng xem lại lịch sử các dịch vụ tiêm mà thú cưng đã sử dụng
    - **Luồng chính:**
-     1. Giáo viên truy cập trang đề xuất phòng
-     2. Chọn thời gian bắt đầu và kết thúc
-     3. Chọn loại phòng và số máy (nếu cần)
-     4. Hệ thống hiển thị danh sách phòng trống trong khung giờ đó
+     1. Khách hàng truy cập trang lịch sử tiêm
+     2. Xem các dịch vụ đã sử dụng, ngày thực hiện, bác sĩ phụ trách, liều lượng, số mũi đã tiêm, ghi chú
 
-4. **Đặt Phòng Học**
-
-   - **Tác nhân:** Giáo viên
-   - **Mô tả:** Giáo viên đặt phòng học cho lớp/buổi dạy
+3. **Xem Lịch Tiêm Phòng**
+   - **Tác nhân:** Khách hàng
+   - **Mô tả:** Khách hàng xem lịch tiêm của thú cưng
    - **Luồng chính:**
-     1. Giáo viên truy cập trang đặt phòng
-     2. Chọn phòng học trống
-     3. Nhập thông tin về thời gian và mục đích sử dụng
-     4. Hệ thống xác nhận và lưu thông tin đặt phòng
-
-5. **Quản Lý Đặt Phòng Cá Nhân**
-
-   - **Tác nhân:** Giáo viên
-   - **Mô tả:** Giáo viên quản lý các yêu cầu đặt phòng của mình
-   - **Luồng chính:**
-     1. Giáo viên truy cập trang quản lý đặt phòng
-     2. Xem danh sách các yêu cầu đặt phòng
-     3. Chỉnh sửa hoặc hủy yêu cầu đặt phòng
-
-6. **Xem Thời Khóa Biểu Cá Nhân**
-   - **Tác nhân:** Giáo viên
-   - **Mô tả:** Giáo viên xem thời khóa biểu cá nhân
-   - **Luồng chính:**
-     1. Giáo viên truy cập trang thời khóa biểu
-     2. Xem thông tin về các lớp học và phòng học được phân công
-
-### Use Cases Sinh Viên
-
-1. **Tìm Kiếm Phòng Học**
-
-   - **Tác nhân:** Sinh viên
-   - **Mô tả:** Sinh viên tìm kiếm phòng học theo tiêu chí
-   - **Luồng chính:**
-     1. Sinh viên truy cập trang tìm kiếm phòng
-     2. Nhập các tiêu chí tìm kiếm (tên, loại, số máy, v.v.)
-     3. Hệ thống hiển thị danh sách phòng học phù hợp
-
-2. **Xem Chi Tiết Phòng Học**
-
-   - **Tác nhân:** Sinh viên
-   - **Mô tả:** Sinh viên xem thông tin chi tiết về phòng học
-   - **Luồng chính:**
-     1. Sinh viên chọn một phòng học từ danh sách
-     2. Hệ thống hiển thị thông tin chi tiết về phòng học
-     3. Xem danh sách thiết bị có trong phòng
-     4. Xem lịch sử dụng phòng
-
-3. **Đặt Phòng Học Nhóm**
-
-   - **Tác nhân:** Sinh viên
-   - **Mô tả:** Sinh viên đặt phòng học cho nhóm học tập
-   - **Luồng chính:**
-     1. Sinh viên truy cập trang đặt phòng
-     2. Chọn phòng học trống
-     3. Nhập thông tin về thời gian, số người tham gia và mục đích sử dụng
-     4. Hệ thống xác nhận và gửi yêu cầu đặt phòng (cần được duyệt)
-
-4. **Quản Lý Đặt Phòng Cá Nhân**
-
-   - **Tác nhân:** Sinh viên
-   - **Mô tả:** Sinh viên quản lý các yêu cầu đặt phòng của mình
-   - **Luồng chính:**
-     1. Sinh viên truy cập trang quản lý đặt phòng
-     2. Xem danh sách các yêu cầu đặt phòng
-     3. Chỉnh sửa hoặc hủy yêu cầu đặt phòng
-
-5. **Xem Thời Khóa Biểu Lớp**
-   - **Tác nhân:** Sinh viên
-   - **Mô tả:** Sinh viên xem thời khóa biểu của lớp
-   - **Luồng chính:**
-     1. Sinh viên truy cập trang thời khóa biểu
-     2. Xem thông tin về các môn học, giáo viên và phòng học
+     1. Khách hàng truy cập trang lịch tiêm
+     2. Xem thông tin về lịch tiêm sắp tới gồm: tên thú cưng, loại vắc-xin, ngày giờ tiêm, trạng thái lịch hẹn
 
 ## Tính Năng Chính
 
 ### Hệ Thống Xác Thực
 
 - Đăng nhập người dùng với tên đăng nhập và mật khẩu
-- Đăng ký người dùng với lựa chọn vai trò
+- Đăng ký người dùng
 - Quản lý phiên làm việc
-- Mã hóa mật khẩu sử dụng password_hash của PHP
+- Cập nhật thông tin người dùng
 
-### Quản Lý Phòng Học
+### Quản Lý Loại Vắc-xin
 
-- Thêm phòng học mới với thông tin số máy và loại phòng
-- Cập nhật thông tin phòng (tên, số máy, trạng thái)
-- Xóa phòng học
-- Xem thống kê phòng học (phòng được sử dụng nhiều nhất)
-- Theo dõi trạng thái phòng (trống/đang sử dụng/bảo trì)
-- Quản lý loại phòng học
-- Xem chi tiết thiết bị trong phòng học
+- Xem danh sách các loại vắc-xin
+- Thêm loại vắc-xin mới
+- Cập nhật thông tin loại vắc-xin
+- Xóa loại vắc-xin không còn sử dụng
 
-### Tìm Kiếm và Đề Xuất Phòng
+### Quản Lý Lịch Hẹn
 
-- Tìm kiếm phòng theo nhiều tiêu chí (tên, loại, số máy, vị trí)
-- Đề xuất phòng trống theo khung thời gian cụ thể
-- Xem chi tiết phòng học và danh sách thiết bị
-- Xem lịch sử sử dụng phòng và các lớp học sắp diễn ra
-- Đề xuất khung giờ trống cho mỗi phòng
+- Xem danh sách lịch hẹn của khách hàng
+- Cập nhật trạng thái lịch hẹn
+- Hệ thống phản ánh cập nhật đến giao diện khách hàng
 
-### Quản Lý Thời Khóa Biểu
+### Quản Lý Báo Cáo Thống Kê
 
-- Tạo thời khóa biểu với các khung giờ
-- Phân công phòng cho thời khóa biểu
-- Xem thời khóa biểu theo phòng, giáo viên hoặc lớp
-- Tối ưu hóa lịch trình
+- Xem các báo cáo tổng quan như số lịch lịch, thống kê số loại vắc-xin
 
-### Hệ Thống Đặt Phòng
+### Quản Lý Thú Cưng
 
-- Đặt phòng cho khoảng thời gian cụ thể
-- Kiểm tra tình trạng phòng và xung đột lịch
-- Hủy đặt phòng
-- Phê duyệt yêu cầu đặt phòng (dành cho quản trị viên)
-- Tính năng tự động sắp xếp để phân bổ phòng tối ưu
+- Xem thông tin thú cưng
+- Thêm thông tin thú cưng 
+
+### Đặt Lịch Tiêm Phòng
+
+- Chọn dịch vụ tiêm phòng
+- Chọn thú cưng cần tiêm, ngày-giờ, ghi chú
+- Hệ thống ghi nhận và lưu lịch hẹn
+
+### Xem Lịch Sử Tiêm 
+
+- Xem các mũi tiêm đã thực hiện
+- Xem bác sĩ phụ trách, liều lượng, ngày tiêm
+- Xem số mũi đã tiêm, ghi chú và trạng thái hoàn thành
+
+### Xem Lịch Tiêm Phòng
+
+- Xem các lịch tiêm gồm tên thú cưng, loại vắc-xin, ngày giờ tiêm, trạng thái lịch hẹn
 
 ## Mô Hình Dữ Liệu
 
-### Người Dùng
+### Tài Khoản
 
-- id (khóa chính)
-- username (tên đăng nhập)
-- email
-- password (mật khẩu đã được mã hóa)
-- full_name (họ tên đầy đủ)
-- role (vai trò: admin/teacher/student)
-- class_code (mã lớp, dành cho sinh viên)
+- MaTK (khoá chính)
+- TenDangNhap (tên đăng nhập)
+- MatKhau (mật khẩu đã mã hoá)
+- Email 
+- VaiTro (phân quyền)
+- TrangThai (trạng thái tài khoản)
+- CreatedAt (thời điểm tạo tài khoản)
+- UpdatedAt (thời điểm cập nhật tài khoản)
 
-### Phòng Học
+### Nhân Viên
 
-- id (khóa chính)
-- name (số phòng)
-- room_type_id (loại phòng)
-- capacity (số máy)
-- location (vị trí)
-- description (mô tả)
-- status (trạng thái: trống/đang sử dụng/bảo trì)
+- MaNV (khoá chính) 
+- HoTen (họ tên nhân viên)
+- ChucVu
+- SDT (số điện thoại)
+- Email
+- DiaChi
+- NgayVaoLam (ngày bắt đầu làm)
+- TrangThai
+- CreatedAt (thời điểm tạo)
+- UpdatedAt (thời điểm cập nhật)
 
-### Loại Phòng
+### Khách hàng
 
-- id (khóa chính)
-- name (tên loại phòng)
-- description (mô tả)
+- MaKH (khoá chính)
+- MaTK ( khoá ngoại)
+- HoTen (họ tên khách hàng)
+- SDT (số điện thoại)
+- Email
+- DiaChi
+- NgayDangKy (ngày tạo tài khoản)
+- GhiChu 
+- CreatedAt (thời điểm tạo)
+- UpdatedAt (thời điểm cập nhật)
 
-### Thiết Bị
+### Thú Cưng
 
-- id (khóa chính)
-- name (tên thiết bị)
-- room_id (id phòng chứa thiết bị)
-- description (mô tả)
-- status (trạng thái: hoạt động/hỏng)
-- purchase_date (ngày mua)
-- last_maintenance_date (ngày bảo trì gần nhất)
+- MaTC (khoá chính)
+- MaKH (khoá ngoại)
+- TenTC (tên thú cưng)
+- Loai (loại thú)
+- Giong (giống loài)
+- NgaySinh
+- CanNang
+- GioiTinh
+- TinhTrangSucKhoe
+- LichSuTiem
+- HinhAnh
+- TrangThai
+- CreatedAt (thời điểm tạo)
+- UpdatedAt (thời điểm cập nhật)
 
-### Thời Khóa Biểu
+### Tiêm Phòng
 
-- id (khóa chính)
-- day_of_week (ngày trong tuần)
-- start_time (thời gian bắt đầu)
-- end_time (thời gian kết thúc)
-- subject (môn học)
-- teacher_id (id giáo viên)
-- class_id (id lớp học)
+- MaTP (khoá chính)
+- TenThuoc (tên vaccine)
+- MoTa
+- LoaiThuCung (dành cho đối tượng nào)
+- SoLanTiem
+- Gia
+- ThoiLuong
+- HinhAnh
+- TrangThai
+- CreatedAt (thời điểm tạo)
+- UpdatedAt (thời điểm cập nhật)
 
-### Đặt Phòng
+### Đặt Lịch
 
-- id (khóa chính)
-- room_id (id phòng)
-- teacher_id (id giáo viên, có thể null)
-- student_id (id sinh viên, có thể null)
-- class_code (mã lớp)
-- start_time (thời gian bắt đầu)
-- end_time (thời gian kết thúc)
-- status (trạng thái: chờ duyệt/đã duyệt/từ chối)
-- timetable_id (tham chiếu tùy chọn đến thời khóa biểu)
+- MaLich (khoá chính)
+- MaKH (khoá ngoại)
+- MaTC (khoá ngoại)
+- MaTP (khoá ngoại)
+- MaNV_DuKien (nhân viên dự kiến thực hiện, khoá ngoại)
+- NgayDat (ngày tạo lịch)
+- NgayHen (ngày thực hiện)
+GioHen
+- TrangThai (tình trạng lịch hẹn)
+- GhiChu
+- CreatedAt (thời điểm tạo)
+- UpdatedAt (thời điểm cập nhật)
+
+### Thanh Toán
+
+- MaTT (khoá chính)
+- MaLich (khoá ngoại)
+- MaKH (khoá ngoại)
+- MaAdmin_XacNhan (mã adnin xác nhận, khoá ngoại)
+- PhuongThuc (phương thức thanh toán)
+- SoTien
+- NgayThanhToan 
+- TrangThai (trạng thái thanh toán)
+- GhiChu
+
+### Chi Tiết Thanh Toán
+
+- MaCTTT (khoá chính)
+- MaTT (khoá ngoại)
+- MaTP (khoá ngoại)
+- MoTa
+- SoLuong
+- DonGia
+- ThanhTien
+
+### Lịch Sử Tiêm Phòng
+
+- MaLSTP (khoá chính)
+- MaTC (khoá ngoại)
+- MaTP (khoá ngoại)
+- TenVacXin
+- LieuLuong
+- NgayTiem
+- MaNV_Tiem (khoá ngoại, nhân viên thực hiện)
+- GhiChu
+
+### Báo Cáo Thống Kê
+
+- MaBCTK (khoá chính)
+- MaNV_Tao (khoá ngoại, nhân viên tạo báo cáo)
+- TenBaoCao
+- ThoiGianBatDau 
+- ThoiGianKetThuc
+- TongDoanhThu
+- TongSoLuongDV
+- SoKhachHangMoi
+- NoiDung
+- NgayTao
 
 ## Yêu Cầu Giao Diện Người Dùng
 
-- Thiết kế đáp ứng tương thích với máy tính để bàn và thiết bị di động
-- Điều hướng trực quan
-- Bảng điều khiển để truy cập nhanh các tính năng quan trọng
-- Chỉ báo trực quan rõ ràng về tình trạng phòng
-- Giao diện đặt phòng thân thiện với người dùng
-- Hỗ trợ tiếng Việt
+- Giao diện website PetCare được thiết kế  hiện đại, phù hợp với chủ đề chăm sóc thú cưng
+- Bố cục trang web rõ ràng, trực quan, sử dụng tông màu trắng xanh cam 
+- Các chức năng chính (đặt lịch, đăng nhập, xem dịch vụ, quản lý hồ sơ, quản lý vacxin, quản lý lịch hẹn) được bố trí nổi bật, dễ truy cập từ thanh điều hướng
+- Mỗi dịch vụ có trang chi tiết riêng gồm mô tả, hình ảnh minh họa, giá dịch vụ, thời gian thực hiện 
+- Form nhập liệu (đăng ký, đặt lịch, phản hồi) có kiểm tra tính hợp lệ, hướng dẫn nhập liệu rõ ràng, và thông báo lỗi cụ thể
+- Ngôn ngữ hiển thị thuần Việt, dễ hiểu và có thể mở rộng sang song ngữ (Việt – Anh) trong tương lai
+- Giao diện dành cho quản trị viên có bố cục rõ ràng, thuận tiện trong việc cập nhật và theo dõi thông tin
 
 ## Yêu Cầu Báo Cáo
 
-- Thống kê sử dụng phòng
-- Thời gian đặt phòng phổ biến
-- Báo cáo hoạt động người dùng
-- Phòng có sẵn tại các khung giờ cụ thể
+- Thống kê lịch hẹn trong ngày
+- Báo cáo số lượng thuốc
 
 ## Yêu Cầu Bảo Mật
 
-- Mã hóa mật khẩu
-- Quản lý phiên làm việc
-- Xác thực đầu vào
-- Bảo vệ CSRF
+- Toàn bộ thông tin khách hàng được bảo mật tuyệt đối
 - Kiểm soát truy cập dựa trên vai trò
 
 ## Cấu Trúc Dự Án
 
-- `/public` - Điểm vào và các file có thể truy cập công khai
-- `/src/Config` - Các file cấu hình cho cơ sở dữ liệu và cài đặt hệ thống
-- `/src/Controllers` - Các bộ điều khiển ứng dụng để xử lý yêu cầu
-- `/src/Models` - Các mô hình dữ liệu cho tương tác cơ sở dữ liệu
-- `/src/Views` - Các mẫu giao diện được tổ chức theo vai trò người dùng
-- `/src/Helpers` - Các hàm tiện ích và hỗ trợ
+- `/petcare/admin` - Giao diện & chức năng dành cho quản trị viên
+- `/petcare/assets` - Tài nguyên tĩnh
+- `/petcare/classes` - Các mô hình dữ liệu cho tương tác với CSDL
+- `/petcare/config` - Các file cấu hình hệ thống 
+- `/petcare/controller` - Các controller của hệ thống- điều phối luồng xử lý
+- `/petcare/customer` - Các trang giao diện dành cho khách hàng + xác thực giao diện khách hàng và quản trị viên
+- `/petcare/database` - Chứa tệp SQL
 
 ## Chi Tiết Triển Khai
 
 - Kiến trúc MVC (Model-View-Controller)
 - PDO cho tương tác cơ sở dữ liệu
-- Định tuyến URL sạch thông qua .htaccess
+- Định tuyến URL sạch thông qua Routing thủ công + query string (controller=…&action=…)
 - Tách biệt logic nghiệp vụ khỏi giao diện
 
 ## Các Tuyến Đường (Routes) Chính
 
 ### Tuyến Đường Quản Trị Viên
 
-- `/admin/search_rooms` - Tìm kiếm và quản lý phòng
+- `/petcare/admin/index.php` - Trang chủ quản trị viên 
+- `/petcare/admin/index.php?controller=AdminController&action=quanLyVacXin` - Quản lý Vacxin của quản trị viên
+- `/petcare/admin/index.php?controller=AdminController&action=quanLyDatLich` -  Quản lý Lịch hẹn của quản trị viên
 
-### Tuyến Đường Giáo Viên
+### Tuyến Đường Khách Hàng
 
 - `/teacher/search_rooms` - Tìm kiếm phòng
 - `/teacher/room_detail/{id}` - Xem chi tiết phòng
 - `/teacher/suggest_rooms` - Đề xuất phòng trống theo thời gian
+- `/petcare/customer/index.php` - Trang chủ khách hàng
+`/customer/index.php?controller=XacThucController&action=hienThiDangNhap` - Đăng nhập
+`/customer/index.php?controller=XacThucController&action=hienThiDangKy` - Đăng ký
+`/customer/index.php?controller=DichVuController&action=hienThiDanhSachDichVu` - Dịch vụ tiêm phòng
+`/customer/index.php?controller=LichTiemController&action=hienThiLichTiem` - Lịch tiêm
+`/customer/index.php?controller=LichTiemController&action=hienThiLichTiem` - Lịch sử tiêm
+`/customer/index.php?controller=KhachHangController&action=hienThiHoSo` - Hồ sơ cá nhân 
 
-### Tuyến Đường Sinh Viên
-
-- `/student/search_rooms` - Tìm kiếm phòng
-- `/student/room_detail/{id}` - Xem chi tiết phòng
 
 ## Hướng Dẫn Sử Dụng
 
 Tài liệu hướng dẫn chi tiết cách sử dụng hệ thống có thể được tìm thấy trong thư mục `/docs`.
-](https://github.com/hanh54/petcare.git)
